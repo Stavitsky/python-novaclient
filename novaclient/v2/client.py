@@ -31,6 +31,7 @@ from novaclient.v2 import hosts
 from novaclient.v2 import hypervisors
 from novaclient.v2 import images
 from novaclient.v2 import keypairs
+from novaclient.v2 import lb_rules
 from novaclient.v2 import limits
 from novaclient.v2 import networks
 from novaclient.v2 import quota_classes
@@ -189,6 +190,7 @@ class Client(object):
         self.availability_zones = \
             availability_zones.AvailabilityZoneManager(self)
         self.server_groups = server_groups.ServerGroupsManager(self)
+        self.lb_rules = lb_rules.LoadBalancerRulesManager(self)
 
         # Add in any extensions...
         if extensions:

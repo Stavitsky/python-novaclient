@@ -61,6 +61,49 @@ CLIENT_BDM2_KEYS = {
 }
 
 
+def do_lb_rule_list(cs, args):
+    """Create a new LoadBalancer rule."""
+    lb_rules = cs.lb_rules.list()
+    columns = ['ID', 'Type', 'Value', 'Allow']
+    utils.print_list(lb_rules, columns)
+
+
+@cliutils.arg('type', metavar='<type>',
+              help=_('Type of the object for which the rule is applied.'))
+@cliutils.arg('value', metavar='<value>',
+              help=_('A regular expression that matches the name(s) of the'
+                     ' object(s) for which the rule is applied.'))
+@cliutils.arg('allow', metavar='<allow>',
+              help=_('Bool value which allow or not migrations.'))
+def do_lb_rule_add(cs, args):
+    """List all LoadBalancer rules."""
+    type = args.type
+    value = args.value
+    allow = args.allow
+
+    lb_rule = cs.lb_rules.create(type, value, allow)
+    print (lb_rule)
+
+
+@cliutils.arg('id', metavar='<id>', help=_('Id of the LoadBalancer rule.'))
+def do_lb_rule_delete(cs, args):
+     """Delete LoadBalancer rule by ID."""
+     cs.lb_rules.delete(args.id)
+
+
+@cliutils.arg('hostname', metavar='<hostname>',
+              help=_('Name of host to suspend.'))
+def do_lb_suspend(cs, args):
+    """Suspend host by name."""
+    cs.lb_rules.suspend(args.hostname)
+
+
+@cliutils.arg('hostname', metavar='<hostname>',
+              help=_('Name of host to suspend.'))
+def do_lb_unsuspend(cs, args):
+    """Unsuspend host by name."""
+    cs.lb_rules.unsuspend(args.hostname)
+
 def _key_value_pairing(text):
     try:
         (k, v) = text.split('=', 1)
