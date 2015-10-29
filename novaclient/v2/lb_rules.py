@@ -53,7 +53,7 @@ class LoadBalancerRulesManager(base.ManagerWithFind):
 
         :rtype: list of :class:`LoadBalancerRule`.
         """
-        return self._list("/lbrules", "lb_rules")
+        return self._list("/loadbalancer/rules", "lb_rules")
 
     def create(self, type, value, allow):
         """
@@ -78,30 +78,10 @@ class LoadBalancerRulesManager(base.ManagerWithFind):
             }
         }
 
-        return self._create("/lbrules", body, "lb_rule")
+        return self._create("/loadbalancer/rules", body, "lb_rule")
 
     def delete(self, lb_rule_id):
         """
         Delete LoadBalancer rule.
         """
-        return self._delete("/lbrules/%s" % lb_rule_id)
-
-    def suspend(self, hostname):
-        """
-        Suspend host.
-        """
-        body = {"suspend_host":
-                {"host": hostname}
-                }
-        url = "/lbrules/action"
-        return self.api.client.post(url, body)
-
-    def unsuspend(self, hostname):
-        """
-        Unsuspend host.
-        """
-        body = {"unsuspend_host":
-                {"host": hostname}
-                }
-        url = "/lbrules/action"
-        return self.api.client.post(url, body)
+        return self._delete("/loadbalancer/rules/%s" % lb_rule_id)

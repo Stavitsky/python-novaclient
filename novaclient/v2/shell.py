@@ -87,9 +87,25 @@ def do_lb_rule_add(cs, args):
 
 @cliutils.arg('id', metavar='<id>', help=_('Id of the LoadBalancer rule.'))
 def do_lb_rule_delete(cs, args):
-     """Delete LoadBalancer rule by ID."""
-     cs.lb_rules.delete(args.id)
+    """Delete LoadBalancer rule by ID."""
+    cs.lb_rules.delete(args.id)
 
+@cliutils.arg(
+    '--detail',
+    dest='detail',
+    action="store_true",
+    default=False,
+    help=_('Add ram_total, ram_used and vcpus to fields.'))
+def do_lb_host_list(cs, args):
+    """List Compute Nodes with its usage stats."""
+    columns = ['Hypervisor Hostname', 'CPU Used Percent', 'RAM Used Percent',
+               'Suspend State', 'Mac To Wake']
+    if args.detail:
+        columns.insert(1, "VCPUS")
+        columns.insert(3, "RAM Total")
+        columns.insert(4, "RAM Used")
+    host_list = cs.loadbalancer.host_list()
+    utils.print_list(host_list, columns)
 
 @cliutils.arg('hostname', metavar='<hostname>',
               help=_('Name of host to suspend.'))
