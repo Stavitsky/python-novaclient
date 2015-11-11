@@ -52,7 +52,7 @@ class LoadBalancerManager(base.ManagerWithFind):
                 {"host": hostname}
                 }
         url = "/loadbalancer/action"
-        return self.api.client.post(url, body)
+        return self.api.client.post(url, body=body)
 
     def unsuspend(self, hostname):
         """
@@ -62,4 +62,4 @@ class LoadBalancerManager(base.ManagerWithFind):
                 {"host": hostname}
                 }
         url = "/loadbalancer/action"
-        return self.api.client.post(url, body)
+        return self.api.client.post(url, body=body)

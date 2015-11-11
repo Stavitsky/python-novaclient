@@ -111,14 +111,14 @@ def do_lb_host_list(cs, args):
               help=_('Name of host to suspend.'))
 def do_lb_suspend(cs, args):
     """Suspend host by name."""
-    cs.lb_rules.suspend(args.hostname)
+    cs.loadbalancer.suspend(args.hostname)
 
 
 @cliutils.arg('hostname', metavar='<hostname>',
-              help=_('Name of host to suspend.'))
+              help=_('Name of host to unsuspend.'))
 def do_lb_unsuspend(cs, args):
     """Unsuspend host by name."""
-    cs.lb_rules.unsuspend(args.hostname)
+    cs.loadbalancer.unsuspend(args.hostname)
 
 def _key_value_pairing(text):
     try:
