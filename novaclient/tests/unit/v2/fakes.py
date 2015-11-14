@@ -192,8 +192,29 @@ class FakeHTTPClient(base_client.HTTPClient):
                         "type": "host",
                         "value": "compute1",
                         "allow": False
-                       }
+                       },
+                    "rule": {
+                        "id": 2,
+                        "type": "ha",
+                        "value": "ha1",
+                        "allow": True
+                    }
                }]})
+
+    def get_loadbalancer_rules_1(self, **kw):
+        return (200, {}, {'lb_rule':
+                          self.get_loadbalancer_rules()[2]['lb_rules'][0]})
+
+    def get_loadbalancer_rules_2(self, **kw):
+        return (200, {}, {'lb_rule':
+                          self.get_loadbalancer_rules()[2]['lb_rules'][1]})
+
+    def post_loadbalancer_rules(self, body, **kw):
+        assert list(body) == ['lb_rule']
+        fakes.assert_has_keys(body['lb_rule'], required=['type',
+                                                         'value',
+                                                         'allow'])
+        return (202, {}, self.get_loadbalancer_rules_1()[2])
 
     #
     # Limits

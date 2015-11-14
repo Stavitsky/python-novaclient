@@ -17,3 +17,7 @@ novaclient/versioninfo
 *.egg
 *egg-info
 init/*
+bin/
+include/
+lib/
+local/

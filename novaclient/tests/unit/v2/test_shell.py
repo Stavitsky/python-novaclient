@@ -813,6 +813,18 @@ class ShellTest(utils.TestCase):
         self.run_command('lb-rule-list')
         self.assert_called('GET', '/loadbalancer/rules')
 
+    def test_lb_rule_add(self):
+        self.run_command('lb-rule-add host compute1 False')
+        body = {
+            "lb_rule":
+            {
+                "type": 'host',
+                "value": 'compute1',
+                "allow": False
+            }
+        }
+        self.assert_called('POST', '/loadbalancer/rules', body)
+
     def test_list(self):
         self.run_command('list')
         self.assert_called('GET', '/servers/detail')
