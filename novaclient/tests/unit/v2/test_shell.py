@@ -825,6 +825,10 @@ class ShellTest(utils.TestCase):
         }
         self.assert_called('POST', '/loadbalancer/rules', body)
 
+    def test_lb_rule_delete(self):
+        self.run_command('lb-rule-delete 2')
+        self.assert_called('DELETE', '/loadbalancer/rules/2')
+
     def test_list(self):
         self.run_command('list')
         self.assert_called('GET', '/servers/detail')

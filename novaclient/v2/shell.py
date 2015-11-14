@@ -77,12 +77,14 @@ def do_lb_rule_list(cs, args):
               help=_('Bool value which allow or not migrations.'))
 def do_lb_rule_add(cs, args):
     """List all LoadBalancer rules."""
+    
     type = args.type
     value = args.value
     allow = args.allow
 
     lb_rule = cs.lb_rules.create(type, value, allow)
-    print (lb_rule)
+    headers = ['id', 'type', 'value', 'allow']
+    utils.print_list([lb_rule], headers)
 
 
 @cliutils.arg('id', metavar='<id>', help=_('Id of the LoadBalancer rule.'))
