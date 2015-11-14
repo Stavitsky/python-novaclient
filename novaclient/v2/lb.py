@@ -14,9 +14,6 @@
 #    under the License.
 
 from novaclient import base
-from novaclient import exceptions
-from novaclient.i18n import _
-from oslo_utils import strutils
 
 
 class LoadBalancer(base.Resource):

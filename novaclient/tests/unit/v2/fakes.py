@@ -181,6 +181,21 @@ class FakeHTTPClient(base_client.HTTPClient):
         })
 
     #
+    # LoadBalancer Rules
+    #
+
+    def get_loadbalancer_rules(self, **kw):
+        return (200, {}, {"lb_rules": [
+               {
+                    "rule": {
+                        "id": 1,
+                        "type": "host",
+                        "value": "compute1",
+                        "allow": False
+                       }
+               }]})
+
+    #
     # Limits
     #
 

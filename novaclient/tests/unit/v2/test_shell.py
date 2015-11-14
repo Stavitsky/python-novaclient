@@ -809,6 +809,10 @@ class ShellTest(utils.TestCase):
         self.assert_called('DELETE', '/images/1', pos=-3)
         self.assert_called('DELETE', '/images/2', pos=-1)
 
+    def test_lb_rule_list(self):
+        self.run_command('lb-rule-list')
+        self.assert_called('GET', '/loadbalancer/rules')
+
     def test_list(self):
         self.run_command('list')
         self.assert_called('GET', '/servers/detail')
