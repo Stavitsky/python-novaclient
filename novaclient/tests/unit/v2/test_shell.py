@@ -829,6 +829,20 @@ class ShellTest(utils.TestCase):
         self.run_command('lb-rule-delete 2')
         self.assert_called('DELETE', '/loadbalancer/rules/2')
 
+    def test_lb_host_list(self):
+        self.run_command('lb-host-list')
+        self.assert_called('GET', '/loadbalancer')
+
+    def test_lb_suspend(self):
+        self.run_command('lb-suspend compute1')
+        self.assert_called('POST', '/loadbalancer/action',
+                           {'suspend_host': {'host': 'compute1'}})
+
+    def test_lb_unsuspend(self):
+        self.run_command('lb-unsuspend compute1')
+        self.assert_called('POST', '/loadbalancer/action',
+                           {'unsuspend_host': {'host': 'compute1'}})
+
     def test_list(self):
         self.run_command('list')
         self.assert_called('GET', '/servers/detail')

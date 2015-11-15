@@ -181,6 +181,39 @@ class FakeHTTPClient(base_client.HTTPClient):
         })
 
     #
+    # LoadBalancer Actions
+    #
+
+    def get_loadbalancer(self, **kw):
+        return (200, {}, {'compute_nodes': [
+            {
+                "node": {
+                    "hypervisor_hostname": 'compute1',
+                    "cpu_used_percent": 50.00,
+                    "ram_total": 2048.00,
+                    "ram_used": 1024.00,
+                    "ram_used_percent": 50.00,
+                    "suspend_state": 'acive',
+                    "mac_to_wake": '00:00:00:00:00:00',
+                    "vcpus": 8
+                },
+                "node": {
+                    "hypervisor_hostname": 'compute2',
+                    "cpu_used_percent": 50.00,
+                    "ram_total": 1024.00,
+                    "ram_used": 512.00,
+                    "ram_used_percent": 50.00,
+                    "suspend_state": 'acive',
+                    "mac_to_wake": '00:00:00:00:00:00',
+                    "vcpus": 4
+                }
+            }
+            ]})
+
+    def post_loadbalancer_action(self, **kw):
+        return (202, {}, None)
+
+    #
     # LoadBalancer Rules
     #
 
@@ -221,7 +254,7 @@ class FakeHTTPClient(base_client.HTTPClient):
                                                          'value',
                                                          'allow'])
         return (202, {}, self.get_loadbalancer_rules_1()[2])
-
+   
     #
     # Limits
     #

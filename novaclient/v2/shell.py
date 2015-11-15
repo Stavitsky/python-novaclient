@@ -77,7 +77,7 @@ def do_lb_rule_list(cs, args):
               help=_('Bool value which allow or not migrations.'))
 def do_lb_rule_add(cs, args):
     """List all LoadBalancer rules."""
-    
+
     type = args.type
     value = args.value
     allow = args.allow
@@ -106,21 +106,21 @@ def do_lb_host_list(cs, args):
         columns.insert(1, "VCPUS")
         columns.insert(3, "RAM Total")
         columns.insert(4, "RAM Used")
-    host_list = cs.loadbalancer.host_list()
+    host_list = cs.lb.host_list()
     utils.print_list(host_list, columns)
 
 @cliutils.arg('hostname', metavar='<hostname>',
               help=_('Name of host to suspend.'))
 def do_lb_suspend(cs, args):
     """Suspend host by name."""
-    cs.loadbalancer.suspend(args.hostname)
+    cs.lb.suspend(args.hostname)
 
 
 @cliutils.arg('hostname', metavar='<hostname>',
               help=_('Name of host to unsuspend.'))
 def do_lb_unsuspend(cs, args):
     """Unsuspend host by name."""
-    cs.loadbalancer.unsuspend(args.hostname)
+    cs.lb.unsuspend(args.hostname)
 
 def _key_value_pairing(text):
     try:

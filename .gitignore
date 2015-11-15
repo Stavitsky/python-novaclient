@@ -21,3 +21,4 @@ bin/
 include/
 lib/
 local/
+lb-client-tests/
